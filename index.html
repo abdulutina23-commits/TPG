@@ -75,7 +75,6 @@
     
     <!-- PANEL KIRI: HERO BRANDING KEMENAG GORONTALO UTARA -->
     <div class="lg:w-[56%] bg-gradient-to-br from-[#0c2421] via-[#0a1929] to-[#07111e] text-white p-6 sm:p-10 lg:p-14 flex flex-col justify-between relative overflow-hidden">
-      <!-- Efek Cahaya Halus di Sudut Kiri Atas -->
       <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute bottom-0 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -87,7 +86,6 @@
           </div>
           <span class="text-xs sm:text-sm font-bold tracking-tight text-white">Kemenag Gorontalo Utara</span>
         </div>
-        <div class="text-xs font-bold text-amber-300/90 tracking-wide">Periode 2025–2030</div>
       </div>
 
       <!-- Konten Tengah Panel Kiri -->
@@ -106,15 +104,18 @@
 
         <!-- 3 Kartu Fitur di Bawah Deskripsi -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-          <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] transition">
-            <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center text-sm mb-3">
+          <div onclick="openInfoPemberkasanModal()" class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.09] hover:border-amber-400/40 transition cursor-pointer group">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/30 text-amber-300 flex items-center justify-center text-sm mb-3 group-hover:scale-105 transition">
               <i class="fa-solid fa-file-pdf"></i>
             </div>
-            <h3 class="font-bold text-sm text-white mb-1">Pemberkasan TPG</h3>
-            <p class="text-xs text-slate-300/80 leading-relaxed">Lampirkan tautan PDF Google Drive & pantau pratinjau dokumen langsung.</p>
+            <h3 class="font-bold text-sm text-white mb-1 flex items-center justify-between">
+              <span>Pemberkasan TPG</span>
+              <i class="fa-solid fa-circle-info text-xs text-amber-300/80"></i>
+            </h3>
+            <p class="text-xs text-slate-300/80 leading-relaxed">Semua dokumen yang diupload WAJIB di arsipkan bukti fisiknya di madrasah masing-masing.</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] transition">
+          <div onclick="openInfoPemberkasanModal()" class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.09] transition cursor-pointer">
             <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 flex items-center justify-center text-sm mb-3">
               <i class="fa-solid fa-clipboard-check"></i>
             </div>
@@ -122,7 +123,7 @@
             <p class="text-xs text-slate-300/80 leading-relaxed">Kelola lembar ceklis bulanan & semesteran serta verifikasi berkas guru.</p>
           </div>
 
-          <div class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] transition">
+          <div onclick="openInfoPemberkasanModal()" class="p-4 rounded-2xl bg-white/[0.04] border border-white/10 hover:bg-white/[0.09] transition cursor-pointer">
             <div class="w-9 h-9 rounded-xl bg-sky-500/20 border border-sky-400/30 text-sky-300 flex items-center justify-center text-sm mb-3">
               <i class="fa-solid fa-print"></i>
             </div>
@@ -135,7 +136,7 @@
       <!-- Footer Panel Kiri -->
       <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-slate-400 z-10">
         <div>Seksi Pendidikan Madrasah Kementerian Agama Kabupaten Gorontalo Utara</div>
-        <div class="font-bold text-slate-300">SIM-TPG v5.2</div>
+        <div class="font-bold text-slate-300">SIM-TPG v6.0 (GitHub & GAS Ready)</div>
       </div>
     </div>
 
@@ -143,15 +144,13 @@
     <div class="lg:w-[44%] flex items-center justify-center p-4 sm:p-8 lg:p-12 bg-[#f4f6f8]">
       <div class="max-w-[440px] w-full bg-white rounded-3xl shadow-[0_12px_40px_rgba(15,37,71,0.08)] border border-slate-200/80 p-6 sm:p-8 animate-[fadeIn_0.25s_ease-out]">
         
-        <!-- Baris Atas Kartu: Portal Resmi & Isi Otomatis Demo -->
+        <!-- Baris Atas Kartu: Portal Resmi -->
         <div class="flex items-center justify-between gap-2 mb-5">
           <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#2e6b4e]">
             <i class="fa-solid fa-shield-halved"></i>
             <span>Portal Resmi SIM-TPG</span>
           </div>
-          <button type="button" onclick="fillDemoAccount()" class="text-xs font-extrabold text-amber-700 hover:text-amber-800 underline decoration-amber-400/60 cursor-pointer transition">
-            Isi Otomatis Akun Demo
-          </button>
+          <span id="cloudStatusBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">Mode Mandiri</span>
         </div>
 
         <!-- Identitas Masuk Akun -->
@@ -220,7 +219,7 @@
         <form id="staffLoginForm" onsubmit="handleStaffLogin(event)" class="space-y-4 hidden-force">
           <div>
             <label id="staffUserLabel" class="text-xs font-bold text-slate-800 block mb-1.5">Username / Email</label>
-            <input type="text" id="staffUsername" placeholder="Admintpg@kemenag.go.id" class="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2e6b4e]" required>
+            <input type="text" id="staffUsername" placeholder="Masukkan username resmi" class="w-full px-4 py-3 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2e6b4e]" required>
             <p class="text-[11px] text-slate-400 mt-1">Gunakan username resmi yang terdaftar pada sistem SIM-TPG.</p>
           </div>
 
@@ -239,7 +238,6 @@
               <input type="checkbox" checked class="w-4 h-4 rounded text-[#2e6b4e] focus:ring-[#2e6b4e]">
               <span>Ingat saya</span>
             </label>
-            <button type="button" onclick="fillDemoAccount()" class="font-bold text-[#2e6b4e] hover:underline">Isi Kredensial Default?</button>
           </div>
 
           <button type="submit" id="staffSubmitBtn" class="w-full py-3.5 px-4 bg-[#3b6e52] hover:bg-[#2f5942] text-white font-bold text-sm rounded-xl shadow-sm transition flex items-center justify-center gap-2">
@@ -249,16 +247,49 @@
         </form>
 
         <!-- Catatan Kaki Kartu -->
-        <div class="mt-6 p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 flex items-start gap-2.5 text-[11px] text-slate-500 leading-relaxed">
-          <i class="fa-solid fa-lock text-[#2e6b4e] mt-0.5"></i>
+        <div class="mt-6 p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/80 flex items-start gap-2.5 text-[11px] text-amber-950 leading-relaxed">
+          <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
           <div>
-            Akses resmi Seksi Pendidikan Madrasah Kementerian Agama Kabupaten Gorontalo Utara. Anda dapat mengelola <b>Peserta, Periode, & Akun</b> di menu <b>Pengaturan</b> setelah masuk.
+            <b>Perhatian:</b> Semua dokumen yang diupload <b>WAJIB di arsipkan bukti fisiknya di madrasah masing-masing</b> untuk kepentingan monev dan pemeriksaan Inspektorat Jenderal.
           </div>
         </div>
 
       </div>
     </div>
 
+  </div>
+
+  <!-- MODAL POP-UP RINCIAN INFORMASI PEMBERKASAN TPG -->
+  <div id="infoPemberkasanModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden-force">
+    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200 animate-[fadeIn_0.2s_ease-out]">
+      <div class="px-6 py-4 bg-gradient-to-r from-navy-900 to-emerald-800 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center">
+            <i class="fa-solid fa-file-shield"></i>
+          </div>
+          <div>
+            <h4 class="font-extrabold text-sm">Informasi Pemberkasan TPG</h4>
+            <p class="text-[11px] text-emerald-200">Ketentuan Arsip & Pemeriksaan</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeInfoPemberkasanModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-rose-600 flex items-center justify-center text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4">
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950 text-xs sm:text-sm leading-relaxed font-semibold flex items-start gap-3">
+          <i class="fa-solid fa-circle-exclamation text-amber-600 text-lg mt-0.5 shrink-0"></i>
+          <div>
+            Semua dokumen yang diupload <b>WAJIB di arsipkan bukti fisiknya di madrasah masing-masing</b> untuk kepentingan monev dan pemeriksaan Inspektorat Jenderal.
+          </div>
+        </div>
+        <div class="flex justify-end pt-1">
+          <button type="button" onclick="closeInfoPemberkasanModal()" class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs transition">
+            Saya Mengerti
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- TOPBAR / HEADER BERSAMA (TAMPIL SETELAH LOGIN) -->
@@ -351,6 +382,14 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Peringatan Arsip Fisik Guru -->
+    <div class="bg-amber-50 border border-amber-200/90 rounded-2xl p-4 flex items-start gap-3 text-xs text-amber-950">
+      <i class="fa-solid fa-box-archive text-amber-600 text-base mt-0.5"></i>
+      <div>
+        <b>Ketentuan Arsip Fisik:</b> Semua dokumen yang diupload <b>WAJIB di arsipkan bukti fisiknya di madrasah masing-masing</b> untuk kepentingan monev dan pemeriksaan Inspektorat Jenderal.
       </div>
     </div>
 
@@ -450,7 +489,7 @@
       </div>
     </section>
 
-    <!-- SUB-TAB PENGAWAS 2: EDIT LEMBAR CEKLIS KELENGKAPAN DOKUMEN (TPG & TUKIN | BULANAN & SEMESTERAN) -->
+    <!-- SUB-TAB PENGAWAS 2: EDIT LEMBAR CEKLIS KELENGKAPAN DOKUMEN -->
     <section id="pengawasSec-ceklis" class="page-sec hidden-force space-y-6">
       <div class="bg-white p-5 rounded-2xl shadow-xs border-2 border-emerald-500/30">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
@@ -512,7 +551,6 @@
         </form>
       </div>
 
-      <!-- Tabel Lembar Ceklis Terpisah: TPG & Selisih Tukin (Bulanan vs Semesteran) -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl shadow-xs border border-slate-200/80 overflow-hidden">
           <div class="p-4 bg-emerald-50/70 border-b border-emerald-200/60 flex items-center justify-between">
@@ -608,14 +646,14 @@
   <!-- ===================================================================== -->
   <div id="adminApp" class="max-w-[1400px] w-full mx-auto flex-1 p-4 md:p-6 lg:p-8 space-y-6 hidden-force">
     
-    <!-- Bar Navigasi Sederhana Admin (Hanya 3 Menu Fokus) -->
+    <!-- Bar Navigasi Sederhana Admin -->
     <div class="bg-white p-3 rounded-2xl shadow-xs border border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-2">
         <button onclick="showAdminTab('peserta')" id="aTab_peserta" class="nav-btn active px-4 py-2.5 rounded-xl text-xs md:text-sm font-extrabold flex items-center gap-2 transition">
           <i class="fa-solid fa-users-gear"></i> 1. Kelola Peserta TPG & Selisih Tukin
         </button>
         <button onclick="showAdminTab('pengaturan')" id="aTab_pengaturan" class="nav-btn px-4 py-2.5 rounded-xl text-xs md:text-sm font-extrabold text-slate-600 hover:bg-slate-100 flex items-center gap-2 transition">
-          <i class="fa-solid fa-sliders"></i> 2. Pengaturan Periode & Kelola Akun
+          <i class="fa-solid fa-sliders"></i> 2. Pengaturan Periode, Akun & Cloud
         </button>
         <button onclick="showAdminTab('cetak')" id="aTab_cetak" class="nav-btn px-4 py-2.5 rounded-xl text-xs md:text-sm font-extrabold text-slate-600 hover:bg-slate-100 flex items-center gap-2 transition">
           <i class="fa-solid fa-file-pdf"></i> 3. Cetak & Unduh PDF
@@ -628,10 +666,8 @@
       </div>
     </div>
 
-    <!-- TAB ADMIN 1: KELOLA PESERTA TPG & SELISIH TUKIN (MASSAL + SATUAN + EDIT & HAPUS) -->
+    <!-- TAB ADMIN 1: KELOLA PESERTA TPG & SELISIH TUKIN -->
     <section id="adminSec-peserta" class="page-sec space-y-6">
-      
-      <!-- Input Massal Copy-Paste (TPG & Selisih Tukin) -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white p-5 rounded-2xl shadow-xs border-2 border-emerald-500/30">
           <div class="flex items-center justify-between mb-3">
@@ -745,7 +781,7 @@
         </form>
       </div>
 
-      <!-- Tabel Daftar Nama Peserta (Dilengkapi Tombol Edit & Hapus di Samping Nama) -->
+      <!-- Tabel Daftar Nama Peserta -->
       <div class="bg-white rounded-2xl shadow-xs border border-slate-200/80 overflow-hidden">
         <div class="p-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2">
           <div>
@@ -780,11 +816,11 @@
       </div>
     </section>
 
-    <!-- TAB ADMIN 2: PENGATURAN PERIODE & KELOLA AKUN -->
+    <!-- TAB ADMIN 2: PENGATURAN PERIODE, KELOLA AKUN & KONEKSI GITHUB/GAS -->
     <section id="adminSec-pengaturan" class="page-sec hidden-force space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- Pengaturan Periode Pencairan (Dilengkapi Fitur Edit, Toggle Aktif/Nonaktif, & Hapus) -->
+        <!-- Pengaturan Periode Pencairan -->
         <div class="bg-white p-6 rounded-3xl shadow-xs border border-slate-200/80 space-y-4">
           <div class="flex items-center justify-between">
             <h3 id="periodFormTitle" class="font-extrabold text-navy-900 text-base md:text-lg flex items-center gap-2.5">
@@ -832,9 +868,9 @@
         </div>
 
         <!-- Kelola Akun Pengawas & Admin -->
-        <div class="bg-white p-5 rounded-2xl shadow-xs border border-slate-200/80 space-y-4">
+        <div class="bg-white p-6 rounded-3xl shadow-xs border border-slate-200/80 space-y-4">
           <div>
-            <h3 class="font-bold text-navy-900 text-sm md:text-base flex items-center gap-2">
+            <h3 class="font-extrabold text-navy-900 text-base md:text-lg flex items-center gap-2">
               <i class="fa-solid fa-user-shield text-emerald-600"></i> Kelola Akun Pengawas & Admin
             </h3>
             <p class="text-xs text-slate-500 mt-0.5">Tambahkan atau ubah akun login untuk Pengawas maupun Admin</p>
@@ -865,7 +901,38 @@
           </form>
           <div id="userRows" class="pt-2"></div>
         </div>
+      </div>
 
+      <!-- KONEKSI GITHUB PAGES KE GOOGLE APPS SCRIPT & BACKUP JSON + SALIN CODE.GS -->
+      <div class="bg-white p-6 rounded-3xl shadow-xs border-2 border-navy-900/15 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h3 class="font-extrabold text-navy-900 text-base md:text-lg flex items-center gap-2">
+              <i class="fa-brands fa-github text-navy-900"></i> Pengaturan Hosting GitHub Pages & Integrasi Code.gs
+            </h3>
+            <p class="text-xs text-slate-500">File <code>index.html</code> ini sudah utuh (standalone) dan di dalamnya tersimpan kode lengkap <code>Code.gs</code>.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" onclick="exportLocalDatabaseJson()" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl flex items-center gap-1.5">
+              <i class="fa-solid fa-download"></i> Backup Database (.json)
+            </button>
+            <button type="button" onclick="copyEmbeddedCodeGs()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-navy-950 font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-1.5">
+              <i class="fa-solid fa-copy"></i> Salin Seluruh Kode Code.gs
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <div class="lg:col-span-9">
+            <label class="text-[11px] font-bold text-slate-600 uppercase block mb-1">URL Web App Google Apps Script (Opsional - Untuk Sinkronisasi Online Antar HP/Laptop di GitHub Pages)</label>
+            <input type="url" id="gasEndpointInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec (Kosongkan jika menggunakan penyimpanan lokal)" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-mono">
+          </div>
+          <div class="lg:col-span-3 flex gap-2">
+            <button type="button" onclick="saveGasEndpointUrl()" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition">
+              Simpan URL Cloud
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -942,7 +1009,7 @@
         <div id="pdfViewerContainer" class="lg:col-span-8 bg-slate-800 relative flex flex-col min-h-[280px] lg:min-h-0">
           <iframe id="pdfPreviewFrame" src="about:blank" class="w-full flex-1 border-0" allow="autoplay"></iframe>
           <div class="bg-slate-900 text-slate-300 px-4 py-2 text-[11px] flex items-center justify-between">
-            <span><i class="fa-solid fa-circle-info text-amber-400 mr-1"></i> Apabila pratinjau tertutup izin Google Drive, klik tombol <b>Buka di Tab Baru</b> di kanan atas.</span>
+            <span><i class="fa-solid fa-circle-info text-amber-400 mr-1"></i> Semua dokumen yang diupload <b>WAJIB di arsipkan bukti fisiknya di madrasah masing-masing</b> untuk kepentingan monev dan pemeriksaan Inspektorat Jenderal.</span>
           </div>
         </div>
 
@@ -1002,7 +1069,82 @@
     </div>
   </div>
 
+  <!-- ===================================================================== -->
+  <!-- EMBEDDED CODE.GS (ARSIP UTUH DI DALAM FILE HTML UNTUK GITHUB)         -->
+  <!-- ===================================================================== -->
+  <script id="embeddedCodeGsSource" type="text/plain">
+/**
+ * SISTEM CHECKLIST DOKUMEN PENCAIRAN TPG & SELISIH TUKIN MADRASAH
+ * Kemenag Kabupaten Gorontalo Utara (Mendukung Google Apps Script & REST API GitHub Pages)
+ */
+const APP = {
+  NAME: 'SIM-TPG & TUKIN Madrasah',
+  ORG: 'Kementerian Agama Kabupaten Gorontalo Utara',
+  VERSION: '6.0.0',
+  PROP_DB: 'TPG_SPREADSHEET_ID',
+  PROP_FOLDER: 'TPG_ROOT_FOLDER_ID',
+  DEFAULT_ADMIN_USER: 'Admintpg@kemenag.go.id',
+  DEFAULT_ADMIN_PASS: 'Tpggorut',
+  DEFAULT_PENGAWAS_USER: 'Pengawas@kemenag.go.id',
+  DEFAULT_PENGAWAS_PASS: 'Pengawasgorut',
+  HEADERS: {
+    Users: ['Username','Password','Nama','Role','TeacherID','Aktif'],
+    Teachers: ['TeacherID','NIP_NPK','Nama','Kategori','Jenjang','NamaMadrasah','NSM','Kabupaten','Aktif','CreatedAt'],
+    Periods: ['PeriodID','NamaPeriode','TanggalMulai','TanggalAkhir','Aktif','CreatedAt'],
+    Checklist: ['ChecklistID','PeriodID','Kategori','Siklus','Jenjang','NamaDokumen','Wajib','FormatDiizinkan','Urutan','Aktif'],
+    Documents: ['DocumentID','PeriodID','TeacherID','ChecklistID','FileName','MimeType','DriveFileID','FileUrl','Status','CatatanAdmin','CatatanPengawas','CatatanKasi','UploadedAt','UpdatedAt','AdminBy','AdminAt','PengawasBy','PengawasAt','KasiBy','KasiAt','StatusAdmin','StatusPengawas','StatusKasi'],
+    Activity: ['Timestamp','Actor','Role','Action','EntityType','EntityID','Detail']
+  }
+};
+
+function doGet(e) {
+  if (e && e.parameter && e.parameter.action) {
+    try {
+      const args = e.parameter.args ? JSON.parse(e.parameter.args) : [];
+      const res = dispatchAction_(e.parameter.action, args);
+      return ContentService.createTextOutput(JSON.stringify({ ok: true, data: res })).setMimeType(ContentService.MimeType.JSON);
+    } catch (err) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: err.message || String(err) })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  return HtmlService.createHtmlOutputFromFile('Index')
+    .setTitle(APP.NAME + ' - ' + APP.ORG)
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function doPost(e) {
+  try {
+    const body = JSON.parse(e.postData.contents || '{}');
+    const res = dispatchAction_(body.action, body.args || []);
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, data: res })).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: err.message || String(err) })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function dispatchAction_(action, args) {
+  const fnMap = {
+    apiPublicTeacherList, apiLogin, apiGetDashboard, apiListDocuments,
+    apiGetMyChecklist, apiSubmitDriveLink, apiVerify, apiSaveTeacher,
+    apiBulkSaveTeachers, apiDeleteTeacher, apiSavePeriod, apiTogglePeriod,
+    apiDeletePeriod, apiSaveChecklist, apiDeleteChecklist, apiAdminData,
+    apiSaveUser, apiDeleteUser, apiExport, apiReport, apiActivity, apiFileUrl
+  };
+  if (!fnMap[action]) throw new Error('Fungsi API tidak dikenali: ' + action);
+  return fnMap[action].apply(null, args || []);
+}
+  </script>
+
   <script>
+    // =========================================================================
+    // KONFIGURASI URL CLOUD GOOGLE APPS SCRIPT (UNTUK HOSTING GITHUB PAGES)
+    // Jika Anda sudah men-deploy Code.gs sebagai Web App, Anda juga dapat
+    // mengisi URL Web App langsung di variabel DEFAULT_GAS_WEBAPP_URL di bawah ini:
+    // =========================================================================
+    const DEFAULT_GAS_WEBAPP_URL = '';
+    const GAS_URL_STORAGE_KEY = 'SIM_TPG_GAS_ENDPOINT_URL';
+
     let state = {
       auth: null,
       user: null,
@@ -1019,15 +1161,68 @@
     };
     const $ = id => document.getElementById(id);
 
+    function getConfiguredGasUrl() {
+      return (localStorage.getItem(GAS_URL_STORAGE_KEY) || DEFAULT_GAS_WEBAPP_URL || '').trim();
+    }
+
+    function updateCloudBadgeUI() {
+      const badge = $('cloudStatusBadge');
+      if (!badge) return;
+      const isNativeGas = typeof google !== 'undefined' && google.script && google.script.run;
+      const remoteUrl = getConfiguredGasUrl();
+      if (isNativeGas || remoteUrl) {
+        badge.textContent = 'Cloud Terhubung';
+        badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800';
+      } else {
+        badge.textContent = 'Standalone Ready';
+        badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600';
+      }
+      if ($('gasEndpointInput')) $('gasEndpointInput').value = remoteUrl;
+    }
+
+    function saveGasEndpointUrl() {
+      const url = ($('gasEndpointInput')?.value || '').trim();
+      if (url && !url.startsWith('https://script.google.com/')) {
+        alertMsg('URL harus berupa URL Web App Google Apps Script (https://script.google.com/macros/s/.../exec)', 'warning');
+        return;
+      }
+      localStorage.setItem(GAS_URL_STORAGE_KEY, url);
+      updateCloudBadgeUI();
+      alertMsg(url ? 'URL Cloud Google Apps Script berhasil disimpan!' : 'Kembali menggunakan penyimpanan mandiri.');
+      loadPublicTeacherNames();
+    }
+
+    function copyEmbeddedCodeGs() {
+      const code = $('embeddedCodeGsSource')?.textContent?.trim() || '';
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      alertMsg('Kode Code.gs berhasil disalin ke Clipboard!');
+    }
+
+    function exportLocalDatabaseJson() {
+      const db = getLocalDb();
+      const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'backup_sim_tpg_gorut_' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
     function setLoading(show, text = 'Memproses Data...') {
       $('loaderTitle').textContent = text;
       $('globalLoader').classList.toggle('hidden-force', !show);
     }
 
     // =========================================================================
-    // HYBRID BACKEND ADAPTER (GOOGLE APPS SCRIPT + LOCALSTORAGE PREVIEW)
+    // HYBRID BACKEND ADAPTER (NATIVE GAS + REMOTE FETCH GITHUB + LOCALSTORAGE)
     // =========================================================================
-    const LOCAL_DB_KEY = 'SIM_TPG_GORUT_DB_V5';
+    const LOCAL_DB_KEY = 'SIM_TPG_GORUT_DB_V6';
 
     function getLocalDb() {
       try {
@@ -1449,17 +1644,34 @@
       'apiSaveChecklist', 'apiDeleteChecklist', 'apiSaveUser', 'apiDeleteUser'
     ]);
 
-    function executeRawCall(name, args) {
-      return new Promise((resolve, reject) => {
-        if (typeof google !== 'undefined' && google.script && google.script.run) {
+    async function executeRawCall(name, args) {
+      // 1. Jika dibuka langsung di dalam Google Apps Script Web App
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        return new Promise((resolve, reject) => {
           google.script.run
             .withSuccessHandler(resolve)
             .withFailureHandler(e => reject(new Error(e.message || e)))[name](...args);
-        } else {
-          setTimeout(() => {
-            try { resolve(localApiHandler(name, args)); } catch (err) { reject(err); }
-          }, 120);
-        }
+        });
+      }
+
+      // 2. Jika di-hosting di GitHub Pages dan URL Cloud GAS sudah diatur
+      const remoteGasUrl = getConfiguredGasUrl();
+      if (remoteGasUrl) {
+        const res = await fetch(remoteGasUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: name, args: args })
+        });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error || 'Terjadi kesalahan pada server Cloud GAS.');
+        return json.data;
+      }
+
+      // 3. Mode Standalone Mandiri (LocalStorage)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          try { resolve(localApiHandler(name, args)); } catch (err) { reject(err); }
+        }, 90);
       });
     }
 
@@ -1536,20 +1748,12 @@
       }
     }
 
-    function fillDemoAccount() {
-      if (state.currentLoginTab === 'GURU') {
-        const firstGuru = state.publicTeachers[0]?.Nama || 'Abdul Rahman, S.Pd.I';
-        $('guruNameInput').value = firstGuru;
-        alertMsg('Nama Guru demo diisi otomatis: ' + firstGuru);
-      } else if (state.currentLoginTab === 'PENGAWAS') {
-        $('staffUsername').value = 'Pengawas@kemenag.go.id';
-        $('staffPassword').value = 'Pengawasgorut';
-        alertMsg('Akun Pengawas diisi otomatis.');
-      } else {
-        $('staffUsername').value = 'Admintpg@kemenag.go.id';
-        $('staffPassword').value = 'Tpggorut';
-        alertMsg('Akun Admin diisi otomatis.');
-      }
+    function openInfoPemberkasanModal() {
+      $('infoPemberkasanModal')?.classList.remove('hidden-force');
+    }
+
+    function closeInfoPemberkasanModal() {
+      $('infoPemberkasanModal')?.classList.add('hidden-force');
     }
 
     function switchLoginTab(tab) {
@@ -1570,13 +1774,13 @@
       } else if (tab === 'PENGAWAS') {
         $('loginInfoText').innerHTML = `Masuk untuk melanjutkan ke <b>Workspace Pemeriksaan Pengawas</b> & pengaturan lembar ceklis dokumen.`;
         $('staffUserLabel').textContent = 'Username / Email Pengawas';
-        $('staffUsername').value = 'Pengawas@kemenag.go.id';
-        $('staffPassword').value = 'Pengawasgorut';
+        $('staffUsername').value = '';
+        $('staffPassword').value = '';
       } else if (tab === 'ADMIN') {
         $('loginInfoText').innerHTML = `Masuk untuk melanjutkan ke <b>Dashboard Pengelolaan Admin</b> (Peserta TPG/Tukin, Periode, & Akun).`;
         $('staffUserLabel').textContent = 'Username / Email Admin';
-        $('staffUsername').value = 'Admintpg@kemenag.go.id';
-        $('staffPassword').value = 'Tpggorut';
+        $('staffUsername').value = '';
+        $('staffPassword').value = '';
       }
     }
 
@@ -1650,7 +1854,6 @@
         $('periodSelectTop').value = state.periodId;
         $('periodSelectMobile').value = state.periodId;
 
-        // Sembunyikan semua portal terlebih dahulu
         $('guruApp').classList.add('hidden-force');
         $('pengawasApp').classList.add('hidden-force');
         $('adminApp').classList.add('hidden-force');
@@ -1704,7 +1907,7 @@
     }
 
     // =========================================================================
-    // 1. LOGIKA PORTAL GURU (UPLOAD LINK PDF & TAMPILKAN FILE PDF)
+    // 1. LOGIKA PORTAL GURU
     // =========================================================================
     function setGuruSiklusFilter(siklus) {
       state.guruSiklusFilter = siklus;
@@ -1853,7 +2056,7 @@
     }
 
     // =========================================================================
-    // 2. LOGIKA PORTAL PENGAWAS (VERIFIKASI & EDIT LEMBAR CEKLIS BULANAN/SEMESTERAN)
+    // 2. LOGIKA PORTAL PENGAWAS
     // =========================================================================
     function showPengawasTab(tab) {
       ['verifikasi', 'ceklis', 'rekap'].forEach(t => {
@@ -2065,7 +2268,7 @@
     }
 
     // =========================================================================
-    // 3. LOGIKA PORTAL ADMIN YANG DISEDERHANAKAN (PESERTA, PENGATURAN/AKUN, PDF)
+    // 3. LOGIKA PORTAL ADMIN
     // =========================================================================
     function showAdminTab(tab) {
       ['peserta', 'pengaturan', 'cetak'].forEach(t => {
@@ -2089,6 +2292,7 @@
 
         renderAdminTeachersTable();
         renderAdminSettingsAndUsers(d);
+        updateCloudBadgeUI();
       } catch (e) {
         alertMsg(e.message, 'danger');
       }
@@ -2568,7 +2772,8 @@
             table { width: 100%; border-collapse: collapse; margin-top: 8px; }
             th, td { border: 1px solid #333; padding: 6px 8px; text-align: left; vertical-align: top; }
             th { background-color: #e2e8f0; font-weight: bold; text-align: center; }
-            .ttd { width: 100%; margin-top: 30px; border: 0; }
+            .catatan { margin-top: 10px; font-size: 8.5pt; font-style: italic; }
+            .ttd { width: 100%; margin-top: 26px; border: 0; }
             .ttd td { border: 0; text-align: center; width: 50%; }
           </style>
         </head>
@@ -2580,6 +2785,7 @@
           </div>
           <div class="judul">${esc(title)}</div>
           ${bodyHtml}
+          <div class="catatan">* Catatan Penting: Semua dokumen yang diupload WAJIB di arsipkan bukti fisiknya di madrasah masing-masing untuk kepentingan monev dan pemeriksaan Inspektorat Jenderal.</div>
           <table class="ttd">
             <tr>
               <td>Mengetahui,<br>Kepala Seksi Pendidikan Madrasah<br><br><br><br><b>(..................................................)</b><br>NIP. ............................................</td>
@@ -2659,6 +2865,7 @@
       $('periodForm')?.addEventListener('submit', savePeriod);
       $('checkForm')?.addEventListener('submit', saveChecklist);
       $('userForm')?.addEventListener('submit', saveUser);
+      updateCloudBadgeUI();
       loadPublicTeacherNames();
     });
   </script>
